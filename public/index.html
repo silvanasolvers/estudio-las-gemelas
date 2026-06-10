@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estudio de oportunidad digital | Grupo Ferretero Las Gemelas</title>
+    <meta name="description" content="Diagnostico consultivo y ruta de oportunidad digital para Grupo Ferretero Las Gemelas.">
+    <meta property="og:title" content="Estudio de oportunidad digital | Las Gemelas">
+    <meta property="og:description" content="Una lectura practica para convertir busquedas, redes y WhatsApp en mas pedidos locales.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#111827">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111827;
+        --muted: #5f6877;
+        --line: #d8dde6;
+        --paper: #f7f3eb;
+        --white: #fffdf8;
+        --steel: #223044;
+        --blue: #1e5aa8;
+        --green: #27745f;
+        --yellow: #f2c94c;
+        --red: #b94a3a;
+        --shadow: 0 22px 60px rgba(17, 24, 39, .14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .hero {
+        min-height: 92vh;
+        display: grid;
+        grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+        align-items: stretch;
+        background: #111827;
+        color: #fffdf8;
+      }
+
+      .hero-copy {
+        padding: clamp(28px, 5vw, 72px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 42px;
+      }
+
+      .brand-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: rgba(255, 253, 248, .72);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 8px 11px;
+        border: 1px solid rgba(255, 255, 255, .18);
+        border-radius: 999px;
+        color: rgba(255, 253, 248, .78);
+        font-size: 13px;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 22px 0 22px;
+        font-size: clamp(42px, 7vw, 96px);
+        line-height: .9;
+        letter-spacing: 0;
+      }
+
+      .hero-lead {
+        max-width: 720px;
+        margin: 0;
+        color: rgba(255, 253, 248, .78);
+        font-size: clamp(18px, 2.2vw, 26px);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 46px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, .18);
+        text-decoration: none;
+        font-weight: 750;
+      }
+
+      .button.primary {
+        background: var(--yellow);
+        color: #201b0d;
+        border-color: var(--yellow);
+      }
+
+      .button.ghost {
+        color: #fffdf8;
+      }
+
+      .hero-proof {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 860px;
+      }
+
+      .proof-item {
+        border-top: 1px solid rgba(255, 255, 255, .2);
+        padding-top: 12px;
+      }
+
+      .proof-item strong {
+        display: block;
+        color: #fffdf8;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .proof-item span {
+        color: rgba(255, 253, 248, .64);
+        font-size: 13px;
+      }
+
+      .hero-media {
+        min-height: 560px;
+        position: relative;
+        background-image:
+          linear-gradient(180deg, rgba(17, 24, 39, .08), rgba(17, 24, 39, .72)),
+          url("https://images.unsplash.com/photo-1752051548721-6ff5be924013?auto=format&fit=crop&w=1400&q=82");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero-card {
+        position: absolute;
+        left: clamp(18px, 4vw, 42px);
+        right: clamp(18px, 4vw, 42px);
+        bottom: clamp(18px, 4vw, 42px);
+        background: rgba(255, 253, 248, .94);
+        color: var(--ink);
+        border: 1px solid rgba(255, 255, 255, .4);
+        border-radius: 8px;
+        padding: clamp(18px, 3vw, 30px);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card .label,
+      .section-label {
+        margin: 0 0 10px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+      }
+
+      .hero-card p {
+        margin: 0;
+        font-size: clamp(22px, 2.7vw, 38px);
+        line-height: 1.05;
+        font-weight: 850;
+        letter-spacing: 0;
+      }
+
+      .band {
+        padding: clamp(56px, 8vw, 108px) clamp(22px, 5vw, 72px);
+      }
+
+      .band.white {
+        background: var(--white);
+      }
+
+      .band.dark {
+        background: var(--steel);
+        color: var(--white);
+      }
+
+      .container {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, .78fr) minmax(280px, .42fr);
+        gap: clamp(24px, 5vw, 70px);
+        align-items: end;
+        margin-bottom: 34px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(32px, 4.8vw, 62px);
+        line-height: .96;
+        letter-spacing: 0;
+      }
+
+      .section-head p,
+      .wide-copy {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .dark .section-head p,
+      .dark .wide-copy {
+        color: rgba(255, 253, 248, .72);
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(18px, 2.6vw, 30px);
+      }
+
+      .dark .panel {
+        background: rgba(255, 253, 248, .08);
+        border-color: rgba(255, 255, 255, .16);
+      }
+
+      .panel h3 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        line-height: 1.1;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .dark .panel p {
+        color: rgba(255, 253, 248, .72);
+      }
+
+      .signal {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .signal-dot {
+        width: 12px;
+        height: 12px;
+        flex: 0 0 12px;
+        margin-top: 7px;
+        border-radius: 99px;
+        background: var(--yellow);
+        box-shadow: 0 0 0 6px rgba(242, 201, 76, .18);
+      }
+
+      .quote-band {
+        padding: clamp(34px, 6vw, 68px);
+        background: var(--ink);
+        color: var(--white);
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(240px, .32fr);
+        gap: 28px;
+        align-items: end;
+      }
+
+      .quote-band p {
+        margin: 0;
+        font-size: clamp(27px, 4.4vw, 58px);
+        line-height: 1.02;
+        font-weight: 850;
+        letter-spacing: 0;
+      }
+
+      .quote-band span {
+        color: rgba(255, 253, 248, .68);
+      }
+
+      .journey {
+        display: grid;
+        gap: 16px;
+      }
+
+      .journey-step {
+        display: grid;
+        grid-template-columns: 110px minmax(0, 1fr) minmax(230px, .42fr);
+        gap: 18px;
+        padding: 20px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .step-num {
+        color: var(--blue);
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+      }
+
+      .journey-step h3 {
+        margin: 0 0 8px;
+        font-size: 24px;
+      }
+
+      .journey-step p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-content: flex-start;
+      }
+
+      .pill {
+        display: inline-flex;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #edf1f7;
+        color: #263244;
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .timeline .panel {
+        position: relative;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .day {
+        width: fit-content;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(30, 90, 168, .1);
+        color: var(--blue);
+        font-weight: 850;
+        font-size: 13px;
+      }
+
+      .dark .day {
+        background: rgba(242, 201, 76, .16);
+        color: var(--yellow);
+      }
+
+      .mini-list {
+        margin: 16px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 9px;
+        color: var(--muted);
+      }
+
+      .mini-list li {
+        padding-left: 18px;
+        position: relative;
+      }
+
+      .mini-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: .68em;
+        width: 7px;
+        height: 7px;
+        border-radius: 99px;
+        background: var(--green);
+      }
+
+      .dark .mini-list {
+        color: rgba(255, 253, 248, .72);
+      }
+
+      .cta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, .45fr);
+        gap: 26px;
+        align-items: center;
+        background:
+          linear-gradient(135deg, rgba(242, 201, 76, .2), transparent 40%),
+          var(--white);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(24px, 5vw, 54px);
+      }
+
+      .cta h2 {
+        font-size: clamp(32px, 4.6vw, 56px);
+      }
+
+      .cta p {
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .source-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 20px;
+        color: rgba(255, 253, 248, .72);
+        font-size: 14px;
+      }
+
+      .footer {
+        padding: 26px clamp(22px, 5vw, 72px);
+        background: #0b111d;
+        color: rgba(255, 253, 248, .62);
+        font-size: 13px;
+      }
+
+      .footer-inner {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy {
+          min-height: auto;
+          gap: 28px;
+        }
+
+        .hero-media {
+          min-height: 360px;
+        }
+
+        .hero-proof,
+        .grid.three,
+        .grid.two,
+        .timeline,
+        .section-head,
+        .quote-band,
+        .cta {
+          grid-template-columns: 1fr;
+        }
+
+        .journey-step {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-proof {
+          display: none;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero-copy,
+        .band {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        h1 {
+          font-size: 42px;
+        }
+
+        .brand-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .button {
+          width: 100%;
+        }
+      }
+
+      @media print {
+        .button {
+          display: none;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="brand-row">
+            <span>SolversAI</span>
+            <span>Preparado por SolversAI · Junio 2026</span>
+          </div>
+
+          <div>
+            <span class="eyebrow">Estudio de oportunidad digital</span>
+            <h1>Grupo Ferretero Las Gemelas</h1>
+            <p class="hero-lead">Una lectura practica para convertir busquedas, redes y WhatsApp en mas confianza, mas pedidos locales y una base tecnologica lista para crecer.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#diagnostico">Ver diagnostico</a>
+              <a class="button ghost" href="#ruta">Ruta sugerida</a>
+            </div>
+          </div>
+
+          <div class="hero-proof" aria-label="Resumen del enfoque">
+            <div class="proof-item">
+              <strong>Presencia detectada</strong>
+              <span>Instagram, Facebook y dominio propio.</span>
+            </div>
+            <div class="proof-item">
+              <strong>Oportunidad central</strong>
+              <span>Convertir visibilidad en mensajes y pedidos.</span>
+            </div>
+            <div class="proof-item">
+              <strong>Siguiente etapa</strong>
+              <span>Automatizar procesos cuando el canal venda.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media" role="img" aria-label="Estanteria de ferreteria con herramientas y cajones">
+          <div class="hero-card">
+            <p class="label">Tesis del estudio</p>
+            <p>El negocio no parte de cero. Lo que falta es ordenar su presencia para que trabaje como otro vendedor.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostico" class="band white">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Lo que encontramos</p>
+              <h2>Hay marca, historia y producto. La brecha esta en conversion digital.</h2>
+            </div>
+            <p>La observacion publica muestra actividad y reconocimiento, pero la experiencia digital todavia no guia al cliente desde la busqueda hasta el pedido con suficiente claridad.</p>
+          </div>
+
+          <div class="grid three">
+            <article class="panel signal">
+              <span class="signal-dot"></span>
+              <div>
+                <h3>Redes con senales reales</h3>
+                <p>Aparecen perfiles de Grupo Ferretero Las Gemelas en Instagram y Facebook, con menciones a Venecia, Fredonia, productos de ferreteria, materiales para obra y contenido de temporada.</p>
+              </div>
+            </article>
+            <article class="panel signal">
+              <span class="signal-dot"></span>
+              <div>
+                <h3>Dominio existente</h3>
+                <p>El dominio ferreterialasgemelas.com existe, pero en la observacion publica se ve como una entrada simple/sistema, no como una vitrina comercial pensada para captar clientes.</p>
+              </div>
+            </article>
+            <article class="panel signal">
+              <span class="signal-dot"></span>
+              <div>
+                <h3>Propuesta aun dispersa</h3>
+                <p>Hay inventario y trayectoria, pero el cliente digital no recibe una ruta directa: que venden, donde estan, como pedir, que resuelven hoy y por que escribirles primero.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="container">
+          <div class="quote-band">
+            <p>El problema no es falta de productos. Es que muchas compras urgentes se deciden antes de llegar al mostrador.</p>
+            <span>Cuando alguien busca una solucion rapida, compara quien aparece, quien responde y quien le da confianza en menos tiempo.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="band white">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Como compra el cliente</p>
+              <h2>Cinco momentos donde Las Gemelas puede ganar mas pedidos.</h2>
+            </div>
+            <p>La ferreteria tiene distintos compradores: hogar, maestro, obra, negocio cercano y cliente recurrente. Cada uno necesita una entrada digital diferente.</p>
+          </div>
+
+          <div class="journey">
+            <article class="journey-step">
+              <span class="step-num">Momento 01</span>
+              <div>
+                <h3>Urgencia del hogar</h3>
+                <p>La persona necesita resolver una fuga, una chapa, pintura, tornillos o una reparacion pequena. Gana quien aparezca rapido y tenga WhatsApp visible.</p>
+              </div>
+              <div class="pill-list">
+                <span class="pill">Google Maps</span>
+                <span class="pill">WhatsApp</span>
+                <span class="pill">Resenas</span>
+              </div>
+            </article>
+
+            <article class="journey-step">
+              <span class="step-num">Momento 02</span>
+              <div>
+                <h3>Obra o remodelacion</h3>
+                <p>El cliente compara materiales, tiempos y disponibilidad. Aqui pesan catalogos simples, fotos de productos y mensajes que demuestren capacidad de surtido.</p>
+              </div>
+              <div class="pill-list">
+                <span class="pill">Materiales</span>
+                <span class="pill">Cotizacion</span>
+                <span class="pill">Domicilio</span>
+              </div>
+            </article>
+
+            <article class="journey-step">
+              <span class="step-num">Momento 03</span>
+              <div>
+                <h3>Maestros y contratistas</h3>
+                <p>Buscan precio, confianza y rapidez. Un canal de WhatsApp organizado puede volverlos clientes recurrentes, no compradores aislados.</p>
+              </div>
+              <div class="pill-list">
+                <span class="pill">Lista frecuente</span>
+                <span class="pill">Credito</span>
+                <span class="pill">Recompra</span>
+              </div>
+            </article>
+
+            <article class="journey-step">
+              <span class="step-num">Momento 04</span>
+              <div>
+                <h3>Administradores y negocios</h3>
+                <p>Conjuntos, fincas, locales y empresas pequenas necesitan proveedor confiable. El discurso debe pasar de producto suelto a solucion recurrente.</p>
+              </div>
+              <div class="pill-list">
+                <span class="pill">Proveedor local</span>
+                <span class="pill">Pedidos</span>
+                <span class="pill">Historial</span>
+              </div>
+            </article>
+
+            <article class="journey-step">
+              <span class="step-num">Momento 05</span>
+              <div>
+                <h3>Cliente que ya las conoce</h3>
+                <p>La marca puede reactivar compradores con novedades, promociones utiles y recordatorios. No se trata de ruido: se trata de estar presentes cuando vuelve la necesidad.</p>
+              </div>
+              <div class="pill-list">
+                <span class="pill">Novedades</span>
+                <span class="pill">Promos utiles</span>
+                <span class="pill">Base de clientes</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band dark">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Lectura del mercado</p>
+              <h2>El canal digital ya no es solo para tiendas grandes.</h2>
+            </div>
+            <p>En Colombia, el comercio digital sigue madurando: el cliente se acostumbro a buscar, preguntar y comprar con menos friccion. Para una ferreteria local, eso no significa montar un e-commerce complejo desde el dia uno; significa estar lista para capturar la intencion.</p>
+          </div>
+
+          <div class="grid three">
+            <article class="panel">
+              <div class="day">Dato de contexto</div>
+              <h3>Mas transacciones digitales</h3>
+              <p>La CCCE reporto para el primer trimestre de 2026 un crecimiento anual de 22,2% en transacciones digitales en Colombia.</p>
+            </article>
+            <article class="panel">
+              <div class="day">Lectura local</div>
+              <h3>La busqueda viene con urgencia</h3>
+              <p>Ferreteria, reparacion y materiales son categorias de necesidad inmediata. Si la informacion no esta clara, el comprador salta a otra opcion.</p>
+            </article>
+            <article class="panel">
+              <div class="day">Oportunidad</div>
+              <h3>Digitalizar sin complicar</h3>
+              <p>La primera victoria no es vender todo online. Es lograr que mas personas encuentren a Las Gemelas, escriban y reciban una respuesta ordenada.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="ruta" class="band white">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Ruta sugerida</p>
+              <h2>Un plan de 90 dias para pasar de presencia a captacion.</h2>
+            </div>
+            <p>La recomendacion es avanzar por capas: primero encontrar y confiar, luego escribir y cotizar, despues automatizar lo que ya se repite.</p>
+          </div>
+
+          <div class="timeline">
+            <article class="panel">
+              <div>
+                <span class="day">Dias 1-30</span>
+                <h3>Ordenar la vitrina digital</h3>
+                <ul class="mini-list">
+                  <li>Optimizar Google Business Profile con fotos, categorias, horarios y WhatsApp.</li>
+                  <li>Convertir el dominio en una pagina comercial clara.</li>
+                  <li>Configurar WhatsApp Business con catalogo y respuestas rapidas.</li>
+                  <li>Definir lineas de producto prioritarias para comunicar.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div>
+                <span class="day">Dias 31-60</span>
+                <h3>Activar contenido que venda sin parecer venta</h3>
+                <ul class="mini-list">
+                  <li>Publicaciones por necesidad: pintura, plomeria, electrico, obra, hogar.</li>
+                  <li>Videos cortos de solucion, no solo producto.</li>
+                  <li>Campanas geolocalizadas cerca de cada sede o zona de influencia.</li>
+                  <li>Mensajes para maestros, hogares y administradores.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div>
+                <span class="day">Dias 61-90</span>
+                <h3>Medir, repetir y preparar automatizacion</h3>
+                <ul class="mini-list">
+                  <li>Medir mensajes, productos mas consultados y fuentes de clientes.</li>
+                  <li>Crear base de clientes frecuentes y segmentos.</li>
+                  <li>Probar flujo de cotizacion por WhatsApp.</li>
+                  <li>Elegir la primera automatizacion interna de mayor impacto.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Fase tecnologica</p>
+              <h2>Cuando el canal digital empiece a traer movimiento, el negocio puede ordenarse por dentro.</h2>
+            </div>
+            <p>La automatizacion no debe llegar como gasto raro. Debe aparecer cuando ya hay procesos repetidos que pueden volverse mas rapidos, medibles y faciles de controlar.</p>
+          </div>
+
+          <div class="grid three">
+            <article class="panel">
+              <h3>Cotizaciones por WhatsApp</h3>
+              <p>Plantillas, captura de datos, seguimiento y recordatorios para que ninguna solicitud se pierda entre chats.</p>
+            </article>
+            <article class="panel">
+              <h3>Clientes frecuentes</h3>
+              <p>Base organizada de maestros, administradores y compradores recurrentes, con historial de necesidades.</p>
+            </article>
+            <article class="panel">
+              <h3>Inventario visible</h3>
+              <p>Primer tablero simple para productos de alta rotacion, agotados y pedidos sugeridos.</p>
+            </article>
+            <article class="panel">
+              <h3>Reportes de demanda</h3>
+              <p>Identificar que preguntan mas, que compran mas y que productos deben comunicarse o reponer primero.</p>
+            </article>
+            <article class="panel">
+              <h3>Pedidos a proveedor</h3>
+              <p>Flujos basicos para listar faltantes, consolidar solicitudes y reducir trabajo manual.</p>
+            </article>
+            <article class="panel">
+              <h3>Operacion por sede</h3>
+              <p>Si trabajan con mas de un punto, separar consultas, ventas y prioridades por zona o sede.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band white">
+        <div class="container">
+          <div class="cta">
+            <div>
+              <p class="section-label">Siguiente paso sugerido</p>
+              <h2>Una conversacion corta para validar prioridades, no una venta forzada.</h2>
+              <p>La propuesta seria revisar con Las Gemelas que productos quieren mover primero, que zonas atienden mejor, como reciben pedidos hoy y que proceso les consume mas tiempo. Con eso se define una primera fase liviana y medible.</p>
+            </div>
+            <div class="panel">
+              <h3>Como entraria SolversAI</h3>
+              <p>Como aliado digital y tecnologico: primero ordenando visibilidad, pagina, redes y WhatsApp; despues automatizando lo que ya demuestre impacto en ventas y operacion.</p>
+              <div class="hero-actions">
+                <a class="button primary" href="https://www.instagram.com/solversai_/" target="_blank" rel="noreferrer">SolversAI</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band dark">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Fuentes y alcance</p>
+              <h2>Este diagnostico usa senales publicas, no datos internos del negocio.</h2>
+            </div>
+            <p>La siguiente fase ideal seria validar con Las Gemelas ventas por categoria, zonas principales, volumen de mensajes y procesos internos.</p>
+          </div>
+          <div class="source-list">
+            <a href="https://www.instagram.com/grupoferreterolasgemelas/" target="_blank" rel="noreferrer">Instagram publico: Grupo Ferretero Las Gemelas</a>
+            <a href="https://www.facebook.com/p/Grupo-Ferretero-Las-Gemelas-61552415698344/" target="_blank" rel="noreferrer">Facebook publico: Grupo Ferretero Las Gemelas</a>
+            <a href="https://ferreterialasgemelas.com/" target="_blank" rel="noreferrer">Dominio observado: ferreterialasgemelas.com</a>
+            <a href="https://ccce.org.co/" target="_blank" rel="noreferrer">Camara Colombiana de Comercio Electronico: publicaciones 2026</a>
+            <a href="https://datareportal.com/digital-in-colombia" target="_blank" rel="noreferrer">DataReportal: Digital in Colombia 2026</a>
+            <a href="https://unsplash.com/es/fotos/los-cajones-y-estanterias-de-una-ferreteria-vintage-ARxuJml_njg" target="_blank" rel="noreferrer">Imagen editorial de apoyo: Tanya Barrow / Unsplash</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>Estudio preparado para Grupo Ferretero Las Gemelas.</span>
+        <span>SolversAI · Estrategia digital, web y automatizacion.</span>
+      </div>
+    </footer>
+  </body>
+</html>
