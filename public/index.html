@@ -39,6 +39,7 @@
         color: var(--ink);
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.5;
+        overflow-x: clip;
       }
 
       a {
@@ -47,7 +48,6 @@
 
       .page {
         min-height: 100vh;
-        overflow: hidden;
       }
 
       .hero {
@@ -61,8 +61,9 @@
       .tech-sticky {
         position: sticky;
         top: 0;
-        min-height: 620px;
         height: 100vh;
+        height: 100svh;
+        min-height: 0;
         overflow: hidden;
         isolation: isolate;
         background: #050813;
@@ -122,7 +123,8 @@
         position: relative;
         z-index: 4;
         width: min(1180px, calc(100% - clamp(36px, 8vw, 120px)));
-        min-height: 100%;
+        height: 100%;
+        min-height: 0;
         margin: 0 auto;
         padding: clamp(24px, 4vw, 58px) 0;
         display: grid;
@@ -580,18 +582,18 @@
 
       @media (max-width: 900px) {
         .hero {
-          height: 390vh;
-          min-height: 2800px;
+          height: 430vh;
+          min-height: 0;
         }
 
         .hero-copy {
-          min-height: auto;
-          gap: 28px;
+          gap: 18px;
         }
 
         .tech-layout {
           grid-template-columns: 1fr;
-          align-items: center;
+          align-content: center;
+          gap: 18px;
         }
 
         .tech-message {
@@ -623,21 +625,61 @@
           padding-right: 18px;
         }
 
+        .hero-copy {
+          padding-top: 22px;
+          padding-bottom: 18px;
+        }
+
+        .eyebrow {
+          padding: 6px 10px;
+          font-size: 12px;
+        }
+
         h1 {
-          font-size: 40px;
+          margin: 16px 0 14px;
+          font-size: 36px;
+        }
+
+        .hero-lead {
+          font-size: 16px;
+          line-height: 1.42;
         }
 
         .brand-row {
           align-items: flex-start;
           flex-direction: column;
+          gap: 10px;
+          font-size: 11px;
         }
 
         .hero-actions {
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          margin-top: 20px;
         }
 
         .button {
           width: 100%;
+          min-height: 42px;
+          padding: 10px 12px;
+          font-size: 14px;
+        }
+
+        .tech-message {
+          padding: 14px;
+        }
+
+        .tech-message h2 {
+          font-size: 22px;
+        }
+
+        .tech-message p {
+          font-size: 13px;
+        }
+
+        .tech-stat {
+          gap: 7px;
         }
       }
 
