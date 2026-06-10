@@ -542,21 +542,138 @@
         color: rgba(255, 253, 248, .68);
       }
 
+      .buyer-band {
+        position: relative;
+        overflow: clip;
+      }
+
+      .buyer-band::before {
+        content: "";
+        position: absolute;
+        inset: 9% -14% auto auto;
+        width: min(44vw, 560px);
+        height: min(44vw, 560px);
+        border-radius: 50%;
+        pointer-events: none;
+        background:
+          radial-gradient(circle, rgba(30, 90, 168, .18), transparent 62%),
+          radial-gradient(circle at 66% 44%, rgba(242, 201, 76, .2), transparent 38%);
+        filter: blur(4px);
+      }
+
+      .buyer-band .container {
+        position: relative;
+        z-index: 1;
+      }
+
       .journey {
         display: grid;
-        gap: 16px;
+        grid-template-columns: minmax(240px, .36fr) minmax(0, 1fr);
+        gap: clamp(22px, 5vw, 72px);
+        align-items: start;
+      }
+
+      .journey-guide {
+        position: sticky;
+        top: clamp(24px, 12vh, 116px);
+        padding: clamp(20px, 3vw, 30px);
+        border: 1px solid rgba(34, 48, 68, .14);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(255, 253, 248, .9), rgba(255, 253, 248, .62)),
+          linear-gradient(180deg, rgba(242, 201, 76, .18), transparent);
+        box-shadow: 0 18px 50px rgba(17, 24, 39, .1);
+      }
+
+      .journey-guide strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: clamp(23px, 3vw, 34px);
+        line-height: 1;
+      }
+
+      .journey-guide p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .journey-track {
+        position: relative;
+        display: grid;
+        gap: clamp(18px, 4vw, 34px);
+      }
+
+      .journey-track::before {
+        content: "";
+        position: absolute;
+        inset: 22px auto 22px 23px;
+        width: 2px;
+        background: linear-gradient(180deg, var(--blue), var(--yellow), var(--green));
+        opacity: .18;
       }
 
       .journey-step {
+        --accent: var(--blue);
+        position: sticky;
+        top: clamp(18px, 10vh, 86px);
         display: grid;
-        grid-template-columns: 110px minmax(0, 1fr) minmax(230px, .42fr);
-        gap: 18px;
-        padding: 20px 0;
-        border-top: 1px solid var(--line);
+        grid-template-columns: 118px minmax(0, 1fr);
+        gap: clamp(16px, 3vw, 28px);
+        min-height: clamp(230px, 34vh, 360px);
+        padding: clamp(20px, 3vw, 34px);
+        border: 1px solid rgba(34, 48, 68, .14);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(255, 253, 248, .98), rgba(255, 253, 248, .88)),
+          radial-gradient(circle at 88% 16%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 34%);
+        box-shadow: 0 22px 58px rgba(17, 24, 39, .12);
+        transform: translateY(18px) scale(.975);
+        opacity: .62;
+        transition: transform .35s ease, opacity .35s ease, box-shadow .35s ease, border-color .35s ease;
+        overflow: hidden;
+      }
+
+      .journey-step:nth-of-type(1) { --accent: var(--blue); }
+      .journey-step:nth-of-type(2) { --accent: var(--yellow); }
+      .journey-step:nth-of-type(3) { --accent: var(--green); }
+      .journey-step:nth-of-type(4) { --accent: var(--red); }
+      .journey-step:nth-of-type(5) { --accent: #38bdf8; }
+
+      .journey-step::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 5px;
+        background: var(--accent);
+      }
+
+      .journey-step::after {
+        content: "";
+        position: absolute;
+        right: -54px;
+        top: -54px;
+        width: 180px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+        box-shadow: inset 0 0 40px color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+
+      .journey-step.is-active,
+      .journey-step:hover {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        border-color: color-mix(in srgb, var(--accent) 36%, var(--line));
+        box-shadow: 0 28px 72px rgba(17, 24, 39, .18);
+      }
+
+      .journey-step > * {
+        position: relative;
+        z-index: 1;
       }
 
       .step-num {
-        color: var(--blue);
+        color: var(--accent);
         font-size: 14px;
         font-weight: 900;
         text-transform: uppercase;
@@ -565,12 +682,14 @@
 
       .journey-step h3 {
         margin: 0 0 8px;
-        font-size: 24px;
+        font-size: clamp(25px, 3vw, 40px);
+        line-height: 1;
       }
 
       .journey-step p {
         margin: 0;
         color: var(--muted);
+        font-size: 17px;
       }
 
       .pill-list {
@@ -578,13 +697,14 @@
         flex-wrap: wrap;
         gap: 8px;
         align-content: flex-start;
+        margin-top: 22px;
       }
 
       .pill {
         display: inline-flex;
         padding: 7px 10px;
         border-radius: 999px;
-        background: #edf1f7;
+        background: color-mix(in srgb, var(--accent) 13%, #edf1f7);
         color: #263244;
         font-size: 13px;
         font-weight: 750;
@@ -721,14 +841,21 @@
         .grid.three,
         .grid.two,
         .timeline,
+        .journey,
         .section-head,
         .quote-band,
         .cta {
           grid-template-columns: 1fr;
         }
 
+        .journey-guide {
+          position: relative;
+          top: auto;
+        }
+
         .journey-step {
           grid-template-columns: 1fr;
+          min-height: clamp(220px, 32vh, 310px);
         }
       }
 
@@ -816,6 +943,40 @@
           max-width: 260px;
           font-size: 15px;
           line-height: 1.12;
+        }
+
+        .journey {
+          gap: 18px;
+        }
+
+        .journey-guide {
+          padding: 18px;
+        }
+
+        .journey-guide strong {
+          font-size: 22px;
+        }
+
+        .journey-track {
+          gap: 18px;
+        }
+
+        .journey-track::before {
+          left: 16px;
+        }
+
+        .journey-step {
+          top: 14px;
+          min-height: 260px;
+          padding: 20px 18px 22px;
+        }
+
+        .journey-step h3 {
+          font-size: 26px;
+        }
+
+        .journey-step p {
+          font-size: 15px;
         }
       }
 
@@ -928,7 +1089,7 @@
         </div>
       </section>
 
-      <section class="band white">
+      <section id="momentos" class="band white buyer-band">
         <div class="container">
           <div class="section-head">
             <div>
@@ -939,70 +1100,77 @@
           </div>
 
           <div class="journey">
-            <article class="journey-step">
-              <span class="step-num">Momento 01</span>
-              <div>
-                <h3>Urgencia del hogar</h3>
-                <p>La persona necesita resolver una fuga, una chapa, pintura, tornillos o una reparacion pequena. Gana quien aparezca rapido y tenga WhatsApp visible.</p>
-              </div>
-              <div class="pill-list">
-                <span class="pill">Google Maps</span>
-                <span class="pill">WhatsApp</span>
-                <span class="pill">Resenas</span>
-              </div>
-            </article>
+            <aside class="journey-guide">
+              <strong id="journeyStatus">Momento 01 de 05</strong>
+              <p>Cada tarjeta revela una oportunidad distinta. Al bajar, el foco cambia y la historia del comprador se vuelve mas clara.</p>
+            </aside>
 
-            <article class="journey-step">
-              <span class="step-num">Momento 02</span>
-              <div>
-                <h3>Obra o remodelacion</h3>
-                <p>El cliente compara materiales, tiempos y disponibilidad. Aqui pesan catalogos simples, fotos de productos y mensajes que demuestren capacidad de surtido.</p>
-              </div>
-              <div class="pill-list">
-                <span class="pill">Materiales</span>
-                <span class="pill">Cotizacion</span>
-                <span class="pill">Domicilio</span>
-              </div>
-            </article>
+            <div class="journey-track">
+              <article class="journey-step is-active">
+                <span class="step-num">Momento 01</span>
+                <div>
+                  <h3>Urgencia del hogar</h3>
+                  <p>La persona necesita resolver una fuga, una chapa, pintura, tornillos o una reparacion pequena. Gana quien aparezca rapido y tenga WhatsApp visible.</p>
+                  <div class="pill-list">
+                    <span class="pill">Google Maps</span>
+                    <span class="pill">WhatsApp</span>
+                    <span class="pill">Resenas</span>
+                  </div>
+                </div>
+              </article>
 
-            <article class="journey-step">
-              <span class="step-num">Momento 03</span>
-              <div>
-                <h3>Maestros y contratistas</h3>
-                <p>Buscan precio, confianza y rapidez. Un canal de WhatsApp organizado puede volverlos clientes recurrentes, no compradores aislados.</p>
-              </div>
-              <div class="pill-list">
-                <span class="pill">Lista frecuente</span>
-                <span class="pill">Credito</span>
-                <span class="pill">Recompra</span>
-              </div>
-            </article>
+              <article class="journey-step">
+                <span class="step-num">Momento 02</span>
+                <div>
+                  <h3>Obra o remodelacion</h3>
+                  <p>El cliente compara materiales, tiempos y disponibilidad. Aqui pesan catalogos simples, fotos de productos y mensajes que demuestren capacidad de surtido.</p>
+                  <div class="pill-list">
+                    <span class="pill">Materiales</span>
+                    <span class="pill">Cotizacion</span>
+                    <span class="pill">Domicilio</span>
+                  </div>
+                </div>
+              </article>
 
-            <article class="journey-step">
-              <span class="step-num">Momento 04</span>
-              <div>
-                <h3>Administradores y negocios</h3>
-                <p>Conjuntos, fincas, locales y empresas pequenas necesitan proveedor confiable. El discurso debe pasar de producto suelto a solucion recurrente.</p>
-              </div>
-              <div class="pill-list">
-                <span class="pill">Proveedor local</span>
-                <span class="pill">Pedidos</span>
-                <span class="pill">Historial</span>
-              </div>
-            </article>
+              <article class="journey-step">
+                <span class="step-num">Momento 03</span>
+                <div>
+                  <h3>Maestros y contratistas</h3>
+                  <p>Buscan precio, confianza y rapidez. Un canal de WhatsApp organizado puede volverlos clientes recurrentes, no compradores aislados.</p>
+                  <div class="pill-list">
+                    <span class="pill">Lista frecuente</span>
+                    <span class="pill">Credito</span>
+                    <span class="pill">Recompra</span>
+                  </div>
+                </div>
+              </article>
 
-            <article class="journey-step">
-              <span class="step-num">Momento 05</span>
-              <div>
-                <h3>Cliente que ya las conoce</h3>
-                <p>La marca puede reactivar compradores con novedades, promociones utiles y recordatorios. No se trata de ruido: se trata de estar presentes cuando vuelve la necesidad.</p>
-              </div>
-              <div class="pill-list">
-                <span class="pill">Novedades</span>
-                <span class="pill">Promos utiles</span>
-                <span class="pill">Base de clientes</span>
-              </div>
-            </article>
+              <article class="journey-step">
+                <span class="step-num">Momento 04</span>
+                <div>
+                  <h3>Administradores y negocios</h3>
+                  <p>Conjuntos, fincas, locales y empresas pequenas necesitan proveedor confiable. El discurso debe pasar de producto suelto a solucion recurrente.</p>
+                  <div class="pill-list">
+                    <span class="pill">Proveedor local</span>
+                    <span class="pill">Pedidos</span>
+                    <span class="pill">Historial</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey-step">
+                <span class="step-num">Momento 05</span>
+                <div>
+                  <h3>Cliente que ya las conoce</h3>
+                  <p>La marca puede reactivar compradores con novedades, promociones utiles y recordatorios. No se trata de ruido: se trata de estar presentes cuando vuelve la necesidad.</p>
+                  <div class="pill-list">
+                    <span class="pill">Novedades</span>
+                    <span class="pill">Promos utiles</span>
+                    <span class="pill">Base de clientes</span>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -1342,6 +1510,31 @@
         window.addEventListener("scroll", requestRender, { passive: true });
         window.addEventListener("resize", requestRender);
         requestRender();
+      })();
+
+      (() => {
+        const steps = Array.from(document.querySelectorAll(".journey-step"));
+        const status = document.getElementById("journeyStatus");
+        if (!steps.length || !status) return;
+
+        function setActive(step) {
+          const index = steps.indexOf(step);
+          if (index < 0) return;
+          steps.forEach((item) => item.classList.toggle("is-active", item === step));
+          status.textContent = `Momento ${String(index + 1).padStart(2, "0")} de ${String(steps.length).padStart(2, "0")}`;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActive(visible.target);
+        }, {
+          rootMargin: "-34% 0px -40% 0px",
+          threshold: [0.18, 0.35, 0.52, 0.7]
+        });
+
+        steps.forEach((step) => observer.observe(step));
       })();
     </script>
   </body>
