@@ -653,9 +653,9 @@
   </head>
   <body>
     <main class="page">
-      <section class="hero" id="inicio" data-frame-count="80">
+      <section class="hero" id="inicio" data-frame-count="80" data-asset-version="ferreteria-20260610-1727">
         <div class="tech-sticky">
-          <img class="tech-poster" src="/tech-poster.webp" alt="">
+          <img class="tech-poster" src="/tech-poster.webp?v=ferreteria-20260610-1727" alt="">
           <canvas class="tech-canvas" id="techCanvas" aria-hidden="true"></canvas>
           <div class="tech-overlay"></div>
           <div class="tech-gridlines"></div>
@@ -1001,6 +1001,7 @@
         if (!hero || !canvas) return;
 
         const frameCount = Number(hero.dataset.frameCount || 80);
+        const assetVersion = hero.dataset.assetVersion || "ferreteria-20260610-1727";
         const messages = [
           {
             at: 0,
@@ -1044,7 +1045,7 @@
         let currentFrame = -1;
         let ticking = false;
 
-        const framePath = (index) => `/tech-frames/frame-${String(index + 1).padStart(3, "0")}.webp`;
+        const framePath = (index) => `/tech-frames/frame-${String(index + 1).padStart(3, "0")}.webp?v=${assetVersion}`;
 
         function loadFrame(index, priority = "auto") {
           if (index < 0 || index >= frameCount) return Promise.resolve(null);
