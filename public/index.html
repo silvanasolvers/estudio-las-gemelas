@@ -304,12 +304,126 @@
         letter-spacing: .12em;
       }
 
+      .hero-impact {
+        position: absolute;
+        inset: auto 0 0;
+        z-index: 5;
+        height: min(34vh, 310px);
+        pointer-events: none;
+        overflow: hidden;
+        opacity: calc(max(0, (var(--hero-progress, 0) - .78) / .22));
+      }
+
+      .hero-impact::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -24%;
+        width: 120vw;
+        height: 120vw;
+        max-width: 1180px;
+        max-height: 1180px;
+        border-radius: 50%;
+        transform:
+          translateX(-50%)
+          scale(calc(.2 + max(0, (var(--hero-progress, 0) - .8) / .2) * 1.1));
+        transform-origin: center;
+        background:
+          radial-gradient(circle, rgba(242, 201, 76, .55) 0 1px, transparent 2px),
+          radial-gradient(circle, rgba(56, 189, 248, .28), transparent 46%);
+        background-size: 18px 18px, auto;
+        filter: blur(.2px);
+        mix-blend-mode: screen;
+      }
+
+      .hero-impact::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 34px;
+        width: min(74vw, 920px);
+        height: 3px;
+        border-radius: 999px;
+        transform:
+          translateX(-50%)
+          scaleX(calc(.12 + max(0, (var(--hero-progress, 0) - .84) / .16) * .88));
+        transform-origin: center;
+        background: linear-gradient(90deg, transparent, #38bdf8 18%, var(--yellow) 58%, transparent);
+        box-shadow:
+          0 0 24px rgba(56, 189, 248, .7),
+          0 0 42px rgba(242, 201, 76, .52);
+      }
+
+      .impact-card {
+        position: absolute;
+        left: clamp(18px, 7vw, 96px);
+        right: clamp(18px, 7vw, 96px);
+        bottom: clamp(92px, 10vw, 128px);
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        color: #fffdf8;
+        transform: translateY(calc((1 - min(1, max(0, (var(--hero-progress, 0) - .78) / .22))) * 28px));
+      }
+
+      .impact-mark {
+        width: clamp(42px, 7vw, 70px);
+        aspect-ratio: 1;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 50% 50%, var(--yellow) 0 18%, transparent 19%),
+          conic-gradient(from 90deg, rgba(56, 189, 248, .15), var(--yellow), rgba(39, 116, 95, .45), rgba(56, 189, 248, .15));
+        box-shadow: 0 0 34px rgba(242, 201, 76, .45);
+      }
+
+      .impact-card p {
+        margin: 0;
+        max-width: 720px;
+        font-size: clamp(17px, 2vw, 25px);
+        line-height: 1.08;
+        font-weight: 850;
+      }
+
       .band {
         padding: clamp(56px, 8vw, 108px) clamp(22px, 5vw, 72px);
       }
 
       .band.white {
         background: var(--white);
+      }
+
+      .diagnosis-band {
+        position: relative;
+        overflow: hidden;
+        margin-top: -1px;
+        padding-top: clamp(76px, 9vw, 132px);
+      }
+
+      .diagnosis-band::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: clamp(92px, 15vw, 190px);
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(242, 201, 76, .34), transparent 56%),
+          linear-gradient(180deg, rgba(5, 8, 19, .16), transparent 76%);
+      }
+
+      .diagnosis-band::after {
+        content: "";
+        position: absolute;
+        left: clamp(22px, 7vw, 96px);
+        right: clamp(22px, 7vw, 96px);
+        top: clamp(30px, 5vw, 62px);
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(30, 90, 168, .35), rgba(242, 201, 76, .7), transparent);
+      }
+
+      .diagnosis-band .container {
+        position: relative;
+        z-index: 1;
       }
 
       .band.dark {
@@ -681,6 +795,28 @@
         .tech-stat {
           gap: 7px;
         }
+
+        .hero-impact {
+          height: 27vh;
+        }
+
+        .impact-card {
+          grid-template-columns: auto minmax(0, 1fr);
+          gap: 10px;
+          bottom: 82px;
+          left: 18px;
+          right: 18px;
+        }
+
+        .impact-mark {
+          width: 34px;
+        }
+
+        .impact-card p {
+          max-width: 260px;
+          font-size: 15px;
+          line-height: 1.12;
+        }
       }
 
       @media print {
@@ -737,10 +873,17 @@
               <p class="tech-frame-note" id="techFrameNote">Frame 001 / 80</p>
             </div>
           </div>
+
+          <div class="hero-impact" aria-hidden="true">
+            <div class="impact-card">
+              <span class="impact-mark"></span>
+              <p>Del impacto visual al diagnostico real.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="diagnostico" class="band white">
+      <section id="diagnostico" class="band white diagnosis-band">
         <div class="container">
           <div class="section-head">
             <div>
