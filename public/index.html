@@ -51,20 +51,83 @@
       }
 
       .hero {
-        min-height: 92vh;
-        display: grid;
-        grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
-        align-items: stretch;
-        background: #111827;
+        height: 430vh;
+        min-height: 3200px;
+        position: relative;
+        background: #050813;
         color: #fffdf8;
       }
 
+      .tech-sticky {
+        position: sticky;
+        top: 0;
+        min-height: 620px;
+        height: 100vh;
+        overflow: hidden;
+        isolation: isolate;
+        background: #050813;
+      }
+
+      .tech-canvas,
+      .tech-poster {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(calc(1.02 + var(--hero-progress, 0) * .08));
+        filter: saturate(1.04) contrast(1.02);
+      }
+
+      .tech-canvas {
+        opacity: 0;
+        transition: opacity .45s ease;
+      }
+
+      .tech-canvas.is-ready {
+        opacity: 1;
+      }
+
+      .tech-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, rgba(5, 8, 19, .94) 0%, rgba(5, 8, 19, .72) 36%, rgba(5, 8, 19, .28) 66%, rgba(5, 8, 19, .78) 100%),
+          linear-gradient(180deg, rgba(5, 8, 19, .82) 0%, rgba(5, 8, 19, .1) 44%, rgba(5, 8, 19, .9) 100%),
+          radial-gradient(circle at 72% 22%, rgba(56, 189, 248, .18), transparent 30%),
+          radial-gradient(circle at 20% 84%, rgba(242, 201, 76, .16), transparent 24%);
+      }
+
+      .tech-gridlines {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        opacity: .32;
+        mix-blend-mode: screen;
+        background:
+          linear-gradient(90deg, rgba(125, 211, 252, .18) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(125, 211, 252, .13) 1px, transparent 1px),
+          repeating-linear-gradient(180deg, rgba(255, 255, 255, .04) 0 1px, transparent 1px 5px);
+        background-size: 72px 72px, 72px 72px, auto;
+        mask-image: linear-gradient(90deg, rgba(0,0,0,.88), transparent 84%);
+      }
+
       .hero-copy {
-        padding: clamp(28px, 5vw, 72px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 42px;
+        position: relative;
+        z-index: 4;
+        width: min(1180px, calc(100% - clamp(36px, 8vw, 120px)));
+        min-height: 100%;
+        margin: 0 auto;
+        padding: clamp(24px, 4vw, 58px) 0;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: clamp(20px, 4vw, 48px);
       }
 
       .brand-row {
@@ -103,6 +166,13 @@
         font-size: clamp(18px, 2.2vw, 26px);
       }
 
+      .tech-layout {
+        display: grid;
+        grid-template-columns: minmax(0, .82fr) minmax(310px, .46fr);
+        gap: clamp(28px, 6vw, 92px);
+        align-items: end;
+      }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
@@ -133,54 +203,33 @@
         color: #fffdf8;
       }
 
-      .hero-proof {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        max-width: 860px;
-      }
-
-      .proof-item {
-        border-top: 1px solid rgba(255, 255, 255, .2);
-        padding-top: 12px;
-      }
-
-      .proof-item strong {
-        display: block;
-        color: #fffdf8;
-        font-size: 15px;
-        margin-bottom: 4px;
-      }
-
-      .proof-item span {
-        color: rgba(255, 253, 248, .64);
-        font-size: 13px;
-      }
-
-      .hero-media {
-        min-height: 560px;
+      .tech-message {
         position: relative;
-        background-image:
-          linear-gradient(180deg, rgba(17, 24, 39, .08), rgba(17, 24, 39, .72)),
-          url("https://images.unsplash.com/photo-1752051548721-6ff5be924013?auto=format&fit=crop&w=1400&q=82");
-        background-size: cover;
-        background-position: center;
-      }
-
-      .hero-card {
-        position: absolute;
-        left: clamp(18px, 4vw, 42px);
-        right: clamp(18px, 4vw, 42px);
-        bottom: clamp(18px, 4vw, 42px);
-        background: rgba(255, 253, 248, .94);
-        color: var(--ink);
-        border: 1px solid rgba(255, 255, 255, .4);
+        min-height: 326px;
+        padding: clamp(18px, 2.7vw, 30px);
+        border: 1px solid rgba(125, 211, 252, .28);
         border-radius: 8px;
-        padding: clamp(18px, 3vw, 30px);
-        box-shadow: var(--shadow);
+        background:
+          linear-gradient(135deg, rgba(125, 211, 252, .16), rgba(255, 255, 255, .035)),
+          rgba(5, 8, 19, .62);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .14);
+        backdrop-filter: blur(18px) saturate(1.25);
+        overflow: hidden;
       }
 
-      .hero-card .label,
+      .tech-message::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(56, 189, 248, .2) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(56, 189, 248, .14) 1px, transparent 1px);
+        background-size: 28px 28px;
+        opacity: .36;
+        mask-image: linear-gradient(180deg, rgba(0,0,0,.86), transparent);
+      }
+
+      .tech-message .label,
       .section-label {
         margin: 0 0 10px;
         color: var(--red);
@@ -190,12 +239,66 @@
         letter-spacing: .12em;
       }
 
-      .hero-card p {
+      .tech-message h2 {
+        position: relative;
         margin: 0;
-        font-size: clamp(22px, 2.7vw, 38px);
-        line-height: 1.05;
-        font-weight: 850;
-        letter-spacing: 0;
+        color: #fffdf8;
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: .98;
+      }
+
+      .tech-message p {
+        position: relative;
+        margin: 16px 0 0;
+        color: rgba(255, 253, 248, .72);
+        font-size: 16px;
+      }
+
+      .tech-stat {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 22px;
+      }
+
+      .tech-stat span {
+        min-height: 58px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, .13);
+        border-radius: 8px;
+        color: rgba(255, 253, 248, .72);
+        background: rgba(255, 255, 255, .055);
+        font-size: 12px;
+        font-weight: 760;
+      }
+
+      .tech-progress {
+        position: relative;
+        z-index: 4;
+        height: 4px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, .12);
+      }
+
+      .tech-progress i {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        transform: scaleX(var(--hero-progress, 0));
+        transform-origin: left center;
+        background: linear-gradient(90deg, #38bdf8, var(--yellow));
+      }
+
+      .tech-frame-note {
+        margin: 0;
+        color: rgba(255, 253, 248, .58);
+        font-size: 12px;
+        font-weight: 760;
+        text-transform: uppercase;
+        letter-spacing: .12em;
       }
 
       .band {
@@ -476,7 +579,8 @@
 
       @media (max-width: 900px) {
         .hero {
-          grid-template-columns: 1fr;
+          height: 390vh;
+          min-height: 2800px;
         }
 
         .hero-copy {
@@ -484,11 +588,19 @@
           gap: 28px;
         }
 
-        .hero-media {
-          min-height: 360px;
+        .tech-layout {
+          grid-template-columns: 1fr;
+          align-items: center;
         }
 
-        .hero-proof,
+        .tech-message {
+          min-height: 0;
+        }
+
+        .tech-stat {
+          grid-template-columns: 1fr;
+        }
+
         .grid.three,
         .grid.two,
         .timeline,
@@ -501,10 +613,6 @@
         .journey-step {
           grid-template-columns: 1fr;
         }
-
-        .hero-proof {
-          display: none;
-        }
       }
 
       @media (max-width: 560px) {
@@ -515,7 +623,7 @@
         }
 
         h1 {
-          font-size: 42px;
+          font-size: 40px;
         }
 
         .brand-row {
@@ -545,43 +653,46 @@
   </head>
   <body>
     <main class="page">
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="brand-row">
-            <span>SolversAI</span>
-            <span>Preparado por SolversAI · Junio 2026</span>
-          </div>
+      <section class="hero" id="inicio" data-frame-count="193">
+        <div class="tech-sticky">
+          <img class="tech-poster" src="/tech-poster.webp" alt="">
+          <canvas class="tech-canvas" id="techCanvas" aria-hidden="true"></canvas>
+          <div class="tech-overlay"></div>
+          <div class="tech-gridlines"></div>
 
-          <div>
-            <span class="eyebrow">Estudio de oportunidad digital</span>
-            <h1>Grupo Ferretero Las Gemelas</h1>
-            <p class="hero-lead">Una lectura practica para convertir busquedas, redes y WhatsApp en mas confianza, mas pedidos locales y una base tecnologica lista para crecer.</p>
-            <div class="hero-actions">
-              <a class="button primary" href="#diagnostico">Ver diagnostico</a>
-              <a class="button ghost" href="#ruta">Ruta sugerida</a>
+          <div class="hero-copy">
+            <div class="brand-row">
+              <span>SolversAI</span>
+              <span>Scroll interactivo / Estudio digital</span>
             </div>
-          </div>
 
-          <div class="hero-proof" aria-label="Resumen del enfoque">
-            <div class="proof-item">
-              <strong>Presencia detectada</strong>
-              <span>Instagram, Facebook y dominio propio.</span>
-            </div>
-            <div class="proof-item">
-              <strong>Oportunidad central</strong>
-              <span>Convertir visibilidad en mensajes y pedidos.</span>
-            </div>
-            <div class="proof-item">
-              <strong>Siguiente etapa</strong>
-              <span>Automatizar procesos cuando el canal venda.</span>
-            </div>
-          </div>
-        </div>
+            <div class="tech-layout">
+              <div>
+                <span class="eyebrow">Hook de oportunidad</span>
+                <h1>Grupo Ferretero Las Gemelas</h1>
+                <p class="hero-lead">De presencia visible a sistema comercial: busqueda local, redes, WhatsApp y automatizacion conectados para vender mejor.</p>
+                <div class="hero-actions">
+                  <a class="button primary" href="#diagnostico">Ver diagnostico</a>
+                  <a class="button ghost" href="#ruta">Ruta de 90 dias</a>
+                </div>
+              </div>
 
-        <div class="hero-media" role="img" aria-label="Estanteria de ferreteria con herramientas y cajones">
-          <div class="hero-card">
-            <p class="label">Tesis del estudio</p>
-            <p>El negocio no parte de cero. Lo que falta es ordenar su presencia para que trabaje como otro vendedor.</p>
+              <article class="tech-message" id="techMessage" aria-live="polite">
+                <p class="label" id="techLabel">Senal 01</p>
+                <h2 id="techTitle">Si no aparecen primero, otro se queda con la urgencia.</h2>
+                <p id="techBody">El cliente de ferreteria compra con prisa: busca, compara y escribe al que le da confianza mas rapido.</p>
+                <div class="tech-stat" id="techStats">
+                  <span>Google local</span>
+                  <span>WhatsApp visible</span>
+                  <span>Respuesta rapida</span>
+                </div>
+              </article>
+            </div>
+
+            <div>
+              <div class="tech-progress" aria-hidden="true"><i></i></div>
+              <p class="tech-frame-note" id="techFrameNote">Frame 001 / 193</p>
+            </div>
           </div>
         </div>
       </section>
@@ -866,7 +977,7 @@
             <a href="https://ferreterialasgemelas.com/" target="_blank" rel="noreferrer">Dominio observado: ferreterialasgemelas.com</a>
             <a href="https://ccce.org.co/" target="_blank" rel="noreferrer">Camara Colombiana de Comercio Electronico: publicaciones 2026</a>
             <a href="https://datareportal.com/digital-in-colombia" target="_blank" rel="noreferrer">DataReportal: Digital in Colombia 2026</a>
-            <a href="https://unsplash.com/es/fotos/los-cajones-y-estanterias-de-una-ferreteria-vintage-ARxuJml_njg" target="_blank" rel="noreferrer">Imagen editorial de apoyo: Tanya Barrow / Unsplash</a>
+            <a href="https://drive.google.com/file/d/1NfJV-njPRpiW1bn3u5hKG8SnptlpVcL6/view?usp=sharing" target="_blank" rel="noreferrer">Video base aportado para el banner interactivo</a>
           </div>
         </div>
       </section>
@@ -875,8 +986,176 @@
     <footer class="footer">
       <div class="footer-inner">
         <span>Estudio preparado para Grupo Ferretero Las Gemelas.</span>
-        <span>SolversAI · Estrategia digital, web y automatizacion.</span>
+        <span>SolversAI / Estrategia digital, web y automatizacion.</span>
       </div>
     </footer>
+    <script>
+      (() => {
+        const hero = document.querySelector(".hero");
+        const canvas = document.getElementById("techCanvas");
+        const label = document.getElementById("techLabel");
+        const title = document.getElementById("techTitle");
+        const body = document.getElementById("techBody");
+        const stats = document.getElementById("techStats");
+        const note = document.getElementById("techFrameNote");
+        if (!hero || !canvas) return;
+
+        const frameCount = Number(hero.dataset.frameCount || 193);
+        const messages = [
+          {
+            at: 0,
+            label: "Senal 01",
+            title: "Si no aparecen primero, otro se queda con la urgencia.",
+            body: "El cliente de ferreteria compra con prisa: busca, compara y escribe al que le da confianza mas rapido.",
+            stats: ["Google local", "WhatsApp visible", "Respuesta rapida"]
+          },
+          {
+            at: 0.22,
+            label: "Senal 02",
+            title: "Una visualizacion no paga la caja. Una conversacion si puede.",
+            body: "La presencia digital debe empujar a una accion concreta: preguntar, cotizar, ubicar la tienda o pedir por WhatsApp.",
+            stats: ["Contenido util", "CTA directo", "Pedido medible"]
+          },
+          {
+            at: 0.44,
+            label: "Senal 03",
+            title: "WhatsApp no puede ser solo un chat lleno.",
+            body: "Etiquetas, respuestas rapidas y seguimiento convierten mensajes sueltos en oportunidades con contexto.",
+            stats: ["Etiquetas", "Cotizacion", "Seguimiento"]
+          },
+          {
+            at: 0.66,
+            label: "Senal 04",
+            title: "La tecnologia entra cuando ya hay flujo comercial.",
+            body: "Primero se activa la demanda. Despues se automatiza lo repetido: clientes, inventario, pedidos y reportes.",
+            stats: ["CRM simple", "Inventario", "Reportes"]
+          },
+          {
+            at: 0.84,
+            label: "Siguiente paso",
+            title: "De ferreteria visible a sistema local de ventas.",
+            body: "La ruta es clara: aparecer mejor, responder mejor, medir mejor y automatizar lo que ya demuestra impacto.",
+            stats: ["30 dias", "60 dias", "90 dias"]
+          }
+        ];
+
+        const cache = new Map();
+        let activeMessage = -1;
+        let currentFrame = -1;
+        let ticking = false;
+
+        const framePath = (index) => `/tech-frames/frame-${String(index + 1).padStart(3, "0")}.webp`;
+
+        function loadFrame(index, priority = "auto") {
+          if (index < 0 || index >= frameCount) return Promise.resolve(null);
+          if (cache.has(index)) return cache.get(index).promise;
+
+          const image = new Image();
+          image.decoding = "async";
+          image.fetchPriority = priority;
+          const promise = new Promise((resolve) => {
+            image.onload = () => {
+              const decode = image.decode ? image.decode() : Promise.resolve();
+              decode.catch(() => undefined).then(() => resolve(image));
+            };
+            image.onerror = () => resolve(null);
+          });
+          image.src = framePath(index);
+          cache.set(index, { image, promise });
+          return promise;
+        }
+
+        function drawCover(image) {
+          if (!image) return;
+          const rect = canvas.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+          const width = Math.max(1, Math.round(rect.width * dpr));
+          const height = Math.max(1, Math.round(rect.height * dpr));
+          if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+          }
+
+          const context = canvas.getContext("2d");
+          const sourceRatio = image.naturalWidth / image.naturalHeight;
+          const targetRatio = width / height;
+          let sourceWidth = image.naturalWidth;
+          let sourceHeight = image.naturalHeight;
+          let sourceX = 0;
+          let sourceY = 0;
+
+          if (targetRatio > sourceRatio) {
+            sourceHeight = sourceWidth / targetRatio;
+            sourceY = (image.naturalHeight - sourceHeight) / 2;
+          } else {
+            sourceWidth = sourceHeight * targetRatio;
+            sourceX = (image.naturalWidth - sourceWidth) / 2;
+          }
+
+          context.clearRect(0, 0, width, height);
+          context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, width, height);
+          canvas.classList.add("is-ready");
+        }
+
+        function progressForHero() {
+          const rect = hero.getBoundingClientRect();
+          const total = Math.max(1, rect.height - window.innerHeight);
+          return Math.min(1, Math.max(0, -rect.top / total));
+        }
+
+        function updateMessage(progress) {
+          let index = 0;
+          messages.forEach((message, candidate) => {
+            if (progress >= message.at) index = candidate;
+          });
+          if (index === activeMessage) return;
+          activeMessage = index;
+          const message = messages[index];
+          label.textContent = message.label;
+          title.textContent = message.title;
+          body.textContent = message.body;
+          stats.innerHTML = message.stats.map((item) => `<span>${item}</span>`).join("");
+        }
+
+        function warmFrames(index) {
+          for (let offset = -5; offset <= 5; offset += 1) {
+            loadFrame(index + offset, Math.abs(offset) <= 2 ? "high" : "low");
+          }
+          if (cache.size > 70) {
+            Array.from(cache.keys())
+              .sort((a, b) => Math.abs(b - index) - Math.abs(a - index))
+              .slice(0, cache.size - 52)
+              .forEach((key) => cache.delete(key));
+          }
+        }
+
+        function render() {
+          ticking = false;
+          const progress = progressForHero();
+          const frame = Math.min(frameCount - 1, Math.max(0, Math.round(progress * (frameCount - 1))));
+          hero.style.setProperty("--hero-progress", progress.toFixed(4));
+          updateMessage(progress);
+          note.textContent = `Frame ${String(frame + 1).padStart(3, "0")} / ${frameCount}`;
+          warmFrames(frame);
+          if (frame !== currentFrame) {
+            currentFrame = frame;
+            loadFrame(frame, "high").then((image) => {
+              if (frame === currentFrame) drawCover(image);
+            });
+          }
+        }
+
+        function requestRender() {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(render);
+        }
+
+        loadFrame(0, "high").then(drawCover);
+        window.addEventListener("scroll", requestRender, { passive: true });
+        window.addEventListener("resize", requestRender);
+        requestRender();
+      })();
+    </script>
   </body>
 </html>

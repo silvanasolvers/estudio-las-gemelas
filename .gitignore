@@ -1,5 +1,8 @@
 desktop.png
 mobile.png
 mobile-check.png
+desktop-tech-*.png
+mobile-tech-*.png
 .chromium-*
 node_modules/
+tmp/
