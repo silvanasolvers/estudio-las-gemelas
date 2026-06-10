@@ -51,8 +51,8 @@
       }
 
       .hero {
-        height: 430vh;
-        min-height: 3200px;
+        height: 330vh;
+        min-height: 2400px;
         position: relative;
         background: #050813;
         color: #fffdf8;
@@ -79,8 +79,9 @@
         max-width: none;
         object-fit: cover;
         object-position: center;
-        transform: scale(calc(1.02 + var(--hero-progress, 0) * .08));
+        transform: scale(calc(1.015 + var(--hero-progress, 0) * .045));
         filter: saturate(1.04) contrast(1.02);
+        will-change: transform, opacity;
       }
 
       .tech-canvas {
@@ -816,7 +817,7 @@
 
       @media (max-width: 900px) {
         .hero {
-          height: 430vh;
+          height: 320vh;
           min-height: 0;
         }
 
@@ -1397,6 +1398,7 @@
         const cache = new Map();
         let activeMessage = -1;
         let currentFrame = -1;
+        let lastWarmFrame = -99;
         let ticking = false;
 
         const framePath = (index) => `/tech-frames/frame-${String(index + 1).padStart(3, "0")}.webp?v=${assetVersion}`;
@@ -1423,7 +1425,7 @@
         function drawCover(image) {
           if (!image) return;
           const rect = canvas.getBoundingClientRect();
-          const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.35);
           const width = Math.max(1, Math.round(rect.width * dpr));
           const height = Math.max(1, Math.round(rect.height * dpr));
           if (canvas.width !== width || canvas.height !== height) {
@@ -1473,13 +1475,15 @@
         }
 
         function warmFrames(index) {
-          for (let offset = -5; offset <= 5; offset += 1) {
-            loadFrame(index + offset, Math.abs(offset) <= 2 ? "high" : "low");
+          if (Math.abs(index - lastWarmFrame) < 3) return;
+          lastWarmFrame = index;
+          for (let offset = -3; offset <= 4; offset += 1) {
+            loadFrame(index + offset, Math.abs(offset) <= 1 ? "high" : "low");
           }
-          if (cache.size > 70) {
+          if (cache.size > 46) {
             Array.from(cache.keys())
               .sort((a, b) => Math.abs(b - index) - Math.abs(a - index))
-              .slice(0, cache.size - 52)
+              .slice(0, cache.size - 34)
               .forEach((key) => cache.delete(key));
           }
         }
